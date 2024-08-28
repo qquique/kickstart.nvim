@@ -91,7 +91,7 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
-vim.g.have_nerd_font = false
+vim.g.have_nerd_font = true
 
 -- [[ Setting options ]]
 -- See `:help vim.opt`
@@ -632,6 +632,7 @@ require('lazy').setup({
             },
           },
         },
+        elixirls = { cwd = '/home/ea/Projects/oss/elixir-ls/release/language_server.sh' },
       }
 
       -- Ensure the servers and tools above are installed
@@ -835,11 +836,18 @@ require('lazy').setup({
       -- Load the colorscheme here.
       -- Like many other themes, this one has different styles, and you could load
       -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-      vim.cmd.colorscheme 'tokyonight-night'
+      vim.cmd.colorscheme 'tokyonight-moon'
 
       -- You can configure highlights by doing something like:
       vim.cmd.hi 'Comment gui=none'
     end,
+    opts = {
+      transparent = true,
+      styles = {
+        sidebars = 'transparent',
+        floats = 'transparent',
+      },
+    },
   },
 
   -- Highlight todo, notes, etc in comments
@@ -880,6 +888,10 @@ require('lazy').setup({
 
       -- ... and there is more!
       --  Check out: https://github.com/echasnovski/mini.nvim
+      require('mini.indentscope').setup {
+        symbol = '│',
+        options = { try_as_border = true },
+      }
     end,
   },
   { -- Highlight, edit, and navigate code
@@ -929,7 +941,7 @@ require('lazy').setup({
   --
   --  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
   --    For additional information, see `:help lazy.nvim-lazy.nvim-structuring-your-plugins`
-  -- { import = 'custom.plugins' },
+  { import = 'custom.plugins' },
 }, {
   ui = {
     -- If you are using a Nerd Font: set icons to an empty table which will use the
@@ -951,6 +963,9 @@ require('lazy').setup({
     },
   },
 })
+local neogit = require 'neogit'
+vim.keymap.set('n', '<leader>gs', neogit.open, { desc = 'Neogit status' })
+vim.keymap.set('n', '<leader>t', '<cmd>ToggleTerm direction=horizontal<cr>', { desc = 'Terminal' })
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
