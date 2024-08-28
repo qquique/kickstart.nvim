@@ -972,5 +972,28 @@ vim.o.expandtab = true -- Pressing the TAB key will insert spaces instead of a T
 vim.o.softtabstop = 2 -- Number of spaces inserted instead of a TAB character
 vim.o.shiftwidth = 2 -- Number of spaces inserted when indenting
 
+local trouble = require 'trouble'
+vim.keymap.set('n', '<leader>xx', function()
+  trouble.toggle()
+end, { desc = 'Trouble' })
+vim.keymap.set('n', '<leader>xw', function()
+  trouble.toggle 'workspace_diagnostics'
+end, { desc = 'Workspace Diagnostics' })
+vim.keymap.set('n', '<leader>xd', function()
+  trouble.toggle 'document_diagnostics'
+end, { desc = 'Document Diagnostics' })
+vim.keymap.set('n', '<leader>xq', function()
+  trouble.toggle 'quickfix'
+end, { desc = 'QuickFix' })
+vim.keymap.set('n', '<leader>xl', function()
+  trouble.toggle 'loclist'
+end, { desc = 'LocList' })
+vim.keymap.set('n', 'gR', function()
+  trouble.toggle 'lsp_references'
+end, { desc = 'LSP References' })
+
+vim.diagnostic.config {
+  virtual_text = false,
+}
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
