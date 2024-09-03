@@ -9,4 +9,8 @@ return {
     --    'ibhagwan/fzf-lua', -- optional
   },
   config = true,
+  filewatcher = {
+    interval = 1000,
+    enabled = true,
+  },
 }
